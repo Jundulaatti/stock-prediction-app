@@ -19,7 +19,7 @@ document.getElementById("ticker-input-form").addEventListener("submit", (e) => {
     const label = document.getElementsByTagName("label")[0];
     label.style.color = "red";
     label.textContent =
-      "You must add at least one ticker. A ticker is a 3 letter or more code for a stock. E.g TSLA for Tesla.";
+      "You must add at least one ticker. A ticker is a unique code for a crypto token. E.g., BTC for Bitcoin.";
   }
 });
 
@@ -61,7 +61,7 @@ async function fetchStockData() {
     );
     fetchReport(stockData.join(""));
   } catch (err) {
-    loadingArea.innerText = "There was an error fetching stock data.";
+    loadingArea.innerText = "There was an error fetching crypto token data.";
     console.error(err.message);
   }
 }
@@ -71,16 +71,18 @@ async function fetchReport(data) {
     {
       role: "system",
       content:
-        "You are a trading guru. Given data on share prices over the past 3 days, write a report of no more than 150 words describing the stocks performance and recommending whether to buy, hold or sell. Use the examples provided between ### to set the style your response.",
+        "You are a crypto trading guru. Given data on token prices over the past 3 days, write a report of no more than 150 words describing the tokens' performance and recommending whether to buy, hold, or sell. Use the examples provided between ### to set the style of your response.",
     },
     {
       role: "user",
       content: `${data}
-            ###
-            OK baby, hold on tight! You are going to haate this! Over the past three days, Tesla (TSLA) shares have plummetted. The stock opened at $223.98 and closed at $202.11 on the third day, with some jumping around in the meantime. This is a great time to buy, baby! But not a great time to sell! But I'm not done! Apple (AAPL) stocks have gone stratospheric! This is a seriously hot stock right now. They opened at $166.38 and closed at $182.89 on day three. So all in all, I would hold on to Tesla shares tight if you already have them - they might bounce right back up and head to the stars! They are volatile stock, so expect the unexpected. For APPL stock, how much do you need the money? Sell now and take the profits or hang on and wait for more! If it were me, I would hang on because this stock is on fire right now!!! Apple are throwing a Wall Street party and y'all invited!
-            ###
-            Apple (AAPL) is the supernova in the stock sky – it shot up from $150.22 to a jaw-dropping $175.36 by the close of day three. We’re talking about a stock that’s hotter than a pepper sprout in a chilli cook-off, and it’s showing no signs of cooling down! If you’re sitting on AAPL stock, you might as well be sitting on the throne of Midas. Hold on to it, ride that rocket, and watch the fireworks, because this baby is just getting warmed up! Then there’s Meta (META), the heartthrob with a penchant for drama. It winked at us with an opening of $142.50, but by the end of the thrill ride, it was at $135.90, leaving us a little lovesick. It’s the wild horse of the stock corral, bucking and kicking, ready for a comeback. META is not for the weak-kneed So, sugar, what’s it going to be? For AAPL, my advice is to stay on that gravy train. As for META, keep your spurs on and be ready for the rally.
-            ###
+      ###
+      Buckle up, because the crypto market has been a wild ride! Over the past three days, Bitcoin (BTC) saw significant volatility. The token opened at $45,000 and dipped to $42,000 before rallying to $47,000 on the third day. This turbulence presents a prime buying opportunity for those brave enough to navigate the stormy seas of crypto trading. Meanwhile, Ethereum (ETH) showcased its resilience, climbing from $3,000 to $3,500. This steady ascent signals a strong buy for long-term holders seeking substantial growth. 
+
+      On the flip side, Ripple (XRP) experienced a slight decline, moving from $0.75 to $0.70. While some may see this as a chance to buy at a lower price, caution is advised due to its unpredictable nature.
+
+      In summary, if you have BTC or ETH, holding or buying more could be wise, given their potential for recovery and growth. XRP holders might want to stay vigilant and consider diversifying to mitigate risks. The crypto market is famed for its volatility, making it essential to stay informed and prepared for sudden changes.
+      ###
             `,
     },
   ];
