@@ -43,13 +43,13 @@ const apiMessage = document.getElementById("api-message");
    - Catch and log any errors returned by the Worker
 */
 
-async function fetchStockData() {
+async function fetchCryptoData() {
   document.querySelector(".action-panel").style.display = "none";
   loadingArea.style.display = "flex";
   try {
     const stockData = await Promise.all(
       tickersArr.map(async (ticker) => {
-        const url = `https://polygon-api-worker.junnusalovaara.workers.dev//?ticker=${ticker}&startDate=${dates.startDate}&endDate=${dates.endDate}`;
+        const url = `https://polygon-api-worker.junnusalovaara.workers.dev/?ticker=${ticker}&startDate=${dates.startDate}&endDate=${dates.endDate}`;
         const response = await fetch(url);
         if (!response.ok) {
           const errMsg = await response.text();
@@ -102,6 +102,7 @@ async function fetchReport(data) {
     if (!response.ok) {
       throw new Error(`Worker Error: ${data.error}`);
     }
+    console.log("Response data:", data);
     renderReport(data.content);
   } catch (err) {
     console.error(err.message);
